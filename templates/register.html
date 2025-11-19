@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Реєстарція</title>
+</head>
+<body>
+
+<div class="form-container">
+    <h2>Реєстрація</h2>
+
+    {% if error %}
+        <p class="error">{{ error }}</p>
+    {% endif %}
+
+    <form action="/register" method="post" enctype="application/x-www-form-urlencoded">
+
+        <label>Електронна пошта</label>
+        <input type="text" name="email" required value="{{ email or '' }}">
+
+        <label>Пароль</label>
+        <input type="password" name="password" required>
+
+        <label>Ім'я</label>
+        <input type="text" name="first_name" required value="{{ first_name or '' }}">
+
+        <label>Призвище</label>
+        <input type="text" name="last_name" required value="{{ last_name or '' }}">
+
+        <label>Роль</label>
+        <select name="role" required>
+            <option value="admin">Адмін</option>
+            <option value="user">КОП</option>
+            <option value="manager">Менеджер</option>
+        </select>
+
+        <button type="submit">Зареєструватися</button>
+    </form>
+</div>
+
+</body>
+</html>
