@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Редагувати замовлення</title>
+
+<style>
+    :root{
+      --bg: #f5f6fa;
+      --surface: #ffffff;
+      --muted: #57606f;
+      --text: #2f3542;
+      --accent: #1e90ff;
+      --success: #2ecc71;
+      --danger: #ff4757;
+      --soft: #f0f2f5;
+      --radius: 10px;
+      --font: "Arial", sans-serif;
+    }
+
+    body {
+        margin: 0;
+        background: var(--bg);
+        font-family: var(--font);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+    }
+
+    .form-container {
+        background: var(--surface);
+        width: 100%;
+        max-width: 520px;
+        padding: 32px;
+        border-radius: var(--radius);
+        box-shadow: 0 6px 20px rgba(47,53,66,0.06);
+    }
+
+    h2 {
+        margin-top: 0;
+        text-align: center;
+        color: var(--text);
+        margin-bottom: 18px;
+    }
+
+    label {
+        color: var(--muted);
+        font-size: 14px;
+        font-weight: 600;
+        display: block;
+        margin-bottom: 6px;
+        margin-top: 14px;
+    }
+
+    input, select, textarea {
+        width: 100%;
+        padding: 12px;
+        border-radius: 8px;
+        border: 1px solid #dcdde1;
+        background: var(--soft);
+        font-size: 14px;
+    }
+
+    textarea { resize: vertical; height: 90px; }
+
+    button {
+        margin-top: 22px;
+        width: 100%;
+        padding: 12px;
+        border-radius: 8px;
+        border: none;
+        background: var(--accent);
+        color: white;
+        font-size: 15px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+    button:hover { background: #1b78d4; }
+
+    a {
+        display: block;
+        text-align: center;
+        margin-top: 18px;
+        color: var(--accent);
+        text-decoration: none;
+        font-weight: 600;
+    }
+    a:hover { text-decoration: underline; }
+
+</style>
+
+</head>
+<body>
+
+<div class="form-container">
+
+    <h2>Редагування замовлення</h2>
+
+    <form action="/edit_deal/{{ deal.id }}" method="post">
+
+        <label>Назва</label>
+        <input type="text" name="title" value="{{ deal.title }}" required>
+
+        <label>Опис</label>
+        <textarea name="description">{{ deal.description }}</textarea>
+
+        <label>Сума</label>
+        <input type="number" step="0.01" name="amount" value="{{ deal.amount }}" required>
+
+        <label>Валюта</label>
+        <select name="currency">
+            <option value="USD" {% if deal.currency == "USD" %}selected{% endif %}>USD</option>
+            <option value="EUR" {% if deal.currency == "EUR" %}selected{% endif %}>EUR</option>
+            <option value="UAH" {% if deal.currency == "UAH" %}selected{% endif %}>UAH</option>
+        </select>
+
+        <label>Статус</label>
+        <select name="status">
+            <option value="new" {% if deal.status == "new" %}selected{% endif %}>Нове</option>
+            <option value="in_progress" {% if deal.status == "in_progress" %}selected{% endif %}>В роботі</option>
+            <option value="closed" {% if deal.status == "closed" %}selected{% endif %}>Закрите</option>
+        </select>
+
+        <button type="submit">Оновити</button>
+    </form>
+
+    <a href="/home">Назад</a>
+
+</div>
+
+</body>
+</html>

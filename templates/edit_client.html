@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Редагувати клієнта</title>
+
+<style>
+    :root{
+      --bg: #f5f6fa;
+      --surface: #ffffff;
+      --muted: #57606f;
+      --text: #2f3542;
+      --accent: #1e90ff;
+      --success: #2ecc71;
+      --danger: #ff4757;
+      --soft: #f0f2f5;
+      --radius: 10px;
+      --font: "Arial", sans-serif;
+    }
+
+    body {
+        margin: 0;
+        background: var(--bg);
+        font-family: var(--font);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+    }
+
+    .form-container {
+        background: var(--surface);
+        width: 100%;
+        max-width: 520px;
+        padding: 32px;
+        border-radius: var(--radius);
+        box-shadow: 0 6px 20px rgba(47,53,66,0.06);
+    }
+
+    h2 {
+        margin-top: 0;
+        text-align: center;
+        color: var(--text);
+        margin-bottom: 18px;
+    }
+
+    label {
+        color: var(--muted);
+        font-size: 14px;
+        font-weight: 600;
+        display: block;
+        margin-bottom: 6px;
+        margin-top: 14px;
+    }
+
+    input, select, textarea {
+        width: 100%;
+        padding: 12px;
+        border-radius: 8px;
+        border: 1px solid #dcdde1;
+        background: var(--soft);
+        font-size: 14px;
+    }
+
+    textarea { resize: vertical; height: 90px; }
+
+    button {
+        margin-top: 22px;
+        width: 100%;
+        padding: 12px;
+        border-radius: 8px;
+        border: none;
+        background: var(--accent);
+        color: white;
+        font-size: 15px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+    button:hover { background: #1b78d4; }
+
+    a {
+        display: block;
+        text-align: center;
+        margin-top: 18px;
+        color: var(--accent);
+        text-decoration: none;
+        font-weight: 600;
+    }
+    a:hover { text-decoration: underline; }
+
+</style>
+
+</head>
+<body>
+
+<div class="form-container">
+
+    <h2>Редагувати клієнта</h2>
+
+    {% if error %}
+        <p class="error">{{ error }}</p>
+    {% endif %}
+
+    <form action="/edit_client/{{ client.id }}" method="post">
+
+        <label>Назва компанії</label>
+        <input type="text" name="company_name" value="{{ client.company_name }}" required>
+
+        <label>Країна</label>
+        <input type="text" name="country" value="{{ client.country }}" required>
+
+        <label>Місто</label>
+        <input type="text" name="city" value="{{ client.city }}" required>
+
+        <label>Адреса</label>
+        <input type="text" name="street" value="{{ client.street }}" required>
+
+        <label>Номер телефона</label>
+        <input type="text" name="phone" value="{{ client.phone }}" required>
+
+        <label>Email</label>
+        <input type="text" name="email" value="{{ client.email }}" required>
+
+        <label>Вебсайт (необов'язково)</label>
+        <input type="text" name="website" value="{{ client.website }}">
+
+        <button type="submit">Зберегти зміни</button>
+    </form>
+
+    <a href="/home" class="back-link">Назад</a>
+</div>
+
+</body>
+</html>

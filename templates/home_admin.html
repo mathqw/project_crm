@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Адмін панель</title>
+
+<style>
+
+  * {
+        box-sizing: border-box;
+    }
+    html, body {
+        overflow-x: hidden;
+    }
+
+    /* BASIC */
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #f5f6fa;
+    }
+
+    /* TOP HEADER */
+    .topbar {
+        width: 100%;
+        height: 60px;
+        background: #2f3542;
+        color: white;
+        padding: 0 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .topbar-left h1 {
+        font-size: 18px;
+        margin: 0;
+    }
+
+    .topbar-right {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .user-box {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .user-icon {
+        background: #57606f;
+        padding: 8px;
+        border-radius: 50%;
+        font-size: 18px;
+    }
+
+    .logout-btn {
+        background: #ff4757;
+        color: white;
+        padding: 8px 14px;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: 0.2s;
+    }
+    .logout-btn:hover {
+        background: #e84118;
+    }
+
+    /* LAYOUT */
+    .layout {
+        display: flex;
+    }
+
+    /* SIDEBAR */
+    .sidebar {
+        width: 250px;
+        background: #ffffff;
+        height: calc(100vh - 60px);
+        padding: 20px;
+        border-right: 1px solid #e0e0e0;
+        position: sticky;
+        top: 60px;
+    }
+
+    .sidebar-title {
+        font-size: 18px;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    .menu {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    /* .menu-item {
+        padding: 10px 12px;
+        border-radius: 8px;
+        color: #333;
+        text-decoration: none;
+        transition: 0.15s;
+    }
+    .menu-item:hover {
+        background: #e0e0e0;
+    } */
+
+    .menu-item {
+        padding: 10px 14px;
+        border-radius: 8px;
+        background: #f5f5f5;        /* світло-сірий фон */
+        color: #222;                 /* темніший текст */
+        text-decoration: none;
+        transition: 0.2s ease;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.08);  /* легка тінь */
+        border: 1px solid #d5d5d5;  /* легка рамка */
+        
+        display: flex;               /* робимо контейнер флексом */
+        justify-content: center;     /* центруємо по горизонталі */
+        align-items: center;         /* центруємо по вертикалі */
+    }
+
+    .menu-item:hover {
+        background: #d9d9d9;         /* темніший ховер */
+        box-shadow: 0 3px 6px rgba(0,0,0,0.12);
+        transform: translateY(-1px); /* легкий рух вверх */
+    }
+
+    /* CONTENT */
+    /* .module-content {
+        padding: 25px;
+        width: 100%;
+    } */
+    .module-content {
+        padding: 25px;
+        flex: 1;
+    }
+
+    /* MODULE TOP */
+    .module-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 25px;
+    }
+
+    .module-top input[type="date"] {
+        padding: 6px;
+        margin-left: 10px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+    }
+
+    .create-btn {
+        background: #2ecc71;
+        padding: 10px 16px;
+        border-radius: 6px;
+        border: none;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+    .create-btn:hover {
+        background: #27ae60;
+    }
+
+    /* TOOLS */
+    .tools {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+
+    .search {
+        flex: 1;
+        padding: 8px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+    }
+
+    .filter {
+        padding: 8px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+    }
+
+    /* TABLE */
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        background: white;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .table th {
+        background: #f0f2f5;
+        padding: 12px;
+        text-align: left;
+    }
+
+    .table td {
+        padding: 12px;
+        border-bottom: 1px solid #eee;
+    }
+
+    .tag {
+        padding: 4px 10px;
+        border-radius: 6px;
+        color: white;
+        font-size: 12px;
+    }
+    .tag.new {
+        background: #1e90ff;
+    }
+    .tag.progress {
+        background: #f39c12;
+    }
+
+    .edit {
+        color: #1e90ff;
+        text-decoration: none;
+    }
+
+    .controls { display:flex; gap:10px; margin-top:18px; flex-wrap:wrap; }
+    .btn {
+        display:inline-block;
+        padding:10px 14px;
+        border-radius:8px;
+        font-weight:700;
+        text-decoration:none;
+        border:none;
+        cursor:pointer;
+    }
+    .btn-accent { background:var(--accent); color:white; }
+    .btn-danger { background:var(--danger); color:white; }
+    .btn-success { background:var(--success); color:white; }
+
+    .btn:active { transform:translateY(1px);}
+
+    .delete-btn {
+        background: #ff4757;
+        color: white;
+        padding: 8px 14px;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: 0.2s;
+    }
+    .delete-btn:hover {
+        background: #e84118;
+    }
+    .delete-btn {
+    outline: none;
+    border: none;
+    }
+    .delete-btn:focus,
+    .delete-btn:active {
+        outline: none;
+        box-shadow: none;
+    }
+
+</style>
+
+</head>
+<body>
+
+<!-- TOP HEADER -->
+<header class="topbar">
+    <div class="topbar-left">
+        <h1>CRM система</h1>
+    </div>
+
+    <div class="topbar-right">
+        <div class="user-box">
+            <a href="/profile" class="user-icon">👨‍💻</a>
+            <div>
+                <div>{{user.first_name}} {{user.last_name}}</div>
+                <small>Адмін</small>
+            </div>
+        </div>
+        <a href="/login" class="logout-btn">Вийти</a>
+    </div>
+</header>
+
+
+
+<div class="layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <nav class="menu">
+            <a href="/home/admin" class="menu-item">Головна сторінка</a>
+            <a href="/home/rop/all_clients" class="menu-item">Клієнти</a>
+            <a href="/home/admin/reports" class="menu-item">Звіти</a>
+        </nav>
+    </aside>
+
+
+
+    <!-- CONTENT AREA -->
+    <section class="module-content">
+
+        <!-- MODULE HEADER -->
+        <div class="module-top">
+            <a href="/register">
+                <button class="create-btn">+ Додати працівника</button>
+            </a>
+        </div>
+
+        <!-- TABLE -->
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Ім'я</th>
+                    <th>Email</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <h2>Менеджери</h2>
+            <tbody>
+                {% for u in users %}
+                    {% if u.role in ["manager"] %}
+                    <tr>
+                        <td>{{ u.id }}</td>
+                        <td>{{ u.first_name }} {{ u.last_name }}</td>
+                        <td>{{ u.email }}</td>
+                        <td>
+                            <button onclick="deleteUser({{ u.id }})" class="delete-btn">
+                                Видалити
+                            </button>
+                        </td>
+                    </tr>
+                    {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+        <h2>КВП</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Ім'я</th>
+                    <th>Email</th>
+                    <th></th>
+                </tr>
+            </thead>
+                <tbody>
+                    {% for u in users %}
+                        {% if u.role in ["rop"] %}
+                        <tr>
+                            <td>{{ u.id }}</td>
+                            <td>{{ u.first_name }} {{ u.last_name }}</td>
+                            <td>{{ u.email }}</td>
+                            <td>
+                                <button onclick="deleteUser({{ u.id }})" class="delete-btn">
+                                    Видалити
+                                </button>
+                            </td>
+                        </tr>
+                        {% endif %}
+                    {% endfor %}
+            </tbody>
+        </table>
+    </section>
+
+</div>
+
+<script>
+async function deleteUser(id) {
+    if (!confirm("Ви впевнені, що хочете видалити цього працівника?")) {
+        return;
+    }
+
+    const response = await fetch(`/users/${id}`, {
+        method: "DELETE"
+    });
+
+    if (response.ok) {
+        alert("Користувача видалено!");
+        location.reload(); 
+    } else {
+        const data = await response.json();
+        alert("Помилка: " + data.detail);
+    }
+}
+</script>
+
+</body>
+</html>

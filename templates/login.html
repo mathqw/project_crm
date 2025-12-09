@@ -1,0 +1,170 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+</head>
+<body>
+
+<h2>Вход</h2>
+
+{% if error %}
+<p style="color:red;">{{ error }}</p>
+{% endif %}
+
+<form method="post">
+    <label>Електронна пошта:</label><br>
+    <input type="email" name="email" required><br><br>
+
+    <label>Пароль:</label><br>
+    <input type="password" name="password" required><br><br>
+
+    <button type="submit">Війти</button>
+    <a href="/register">Реєстрація</a><br>
+    <a href="/home">На головну</a>
+</form>
+
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+
+<style>
+    :root{
+      --bg: #f5f6fa;
+      --surface: #ffffff;
+      --muted: #57606f;
+      --text: #2f3542;
+      --accent: #1e90ff;
+      --success: #2ecc71;
+      --danger: #ff4757;
+      --soft: #f0f2f5;
+      --radius: 10px;
+      --font: "Arial", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+        margin: 0;
+        background: var(--bg);
+        font-family: var(--font);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    .login-card {
+        background: var(--surface);
+        width: 100%;
+        max-width: 420px;
+        padding: 32px;
+        border-radius: var(--radius);
+        box-shadow: 0 6px 20px rgba(47,53,66,0.06);
+    }
+
+    h2 {
+        margin-top: 0;
+        color: var(--text);
+        text-align: center;
+        font-size: 22px;
+    }
+
+    label {
+        color: var(--muted);
+        font-size: 14px;
+        font-weight: 600;
+        display: block;
+        margin-bottom: 6px;
+    }
+
+    input {
+        width: 100%;
+        padding: 12px;
+        border-radius: 8px;
+        border: 1px solid #dcdde1;
+        background: var(--soft);
+        font-size: 14px;
+        margin-bottom: 18px;
+    }
+
+    button {
+        width: 100%;
+        padding: 12px;
+        border-radius: 8px;
+        border: none;
+        font-size: 15px;
+        font-weight: bold;
+        cursor: pointer;
+        background: var(--accent);
+        color: white;
+        transition: 0.2s;
+    }
+    button:hover {
+        background: #1b78d4;
+    }
+
+    .links {
+        margin-top: 18px;
+        display: flex;
+        justify-content: space-between;
+        font-size: 14px;
+    }
+
+    .links a {
+        color: var(--accent);
+        text-decoration: none;
+        font-weight: 600;
+    }
+    .links a:hover {
+        text-decoration: underline;
+    }
+
+    .error {
+        background: rgba(255, 71, 87, 0.15);
+        color: var(--danger);
+        padding: 10px 14px;
+        border-radius: 8px;
+        margin-bottom: 16px;
+        font-size: 14px;
+        border: 1px solid rgba(255, 71, 87, 0.3);
+    }
+</style>
+
+</head>
+<body>
+
+<div class="login-card">
+
+    <h2>Вхід</h2>
+
+    {% if error %}
+    <div class="error">{{ error }}</div>
+    {% endif %}
+
+    <form method="post">
+
+        <label>Електронна пошта:</label>
+        <input type="email" name="email" required>
+
+        <label>Пароль:</label>
+        <input type="password" name="password" required>
+
+        <button type="submit">Увійти</button>
+
+        <div class="links">
+            <a href="/register">Реєстрація</a>
+            <a href="/home">На головну</a>
+        </div>
+
+    </form>
+
+</div>
+
+</body>
+</html>
+

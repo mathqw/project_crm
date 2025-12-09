@@ -1,48 +1,3 @@
-<!-- <!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <title>Реєстарція</title>
-    
-</head>
-<body>
-
-<div class="form-container">
-    <h2>Реєстрація</h2>
-
-    {% if error %}
-        <p class="error">{{ error }}</p>
-    {% endif %}
-
-    <form action="/register" method="post" enctype="application/x-www-form-urlencoded">
-
-        <label>Електронна пошта</label>
-        <input type="text" name="email" required value="{{ email or '' }}">
-
-        <label>Пароль</label>
-        <input type="password" name="password" required>
-
-        <label>Ім'я</label>
-        <input type="text" name="first_name" required value="{{ first_name or '' }}">
-
-        <label>Призвище</label>
-        <input type="text" name="last_name" required value="{{ last_name or '' }}">
-
-        <label>Роль</label>
-        <select name="role" required>
-            <option value="admin">Адмін</option>
-            <option value="rop">КВП</option>
-            <option value="manager">Менеджер</option>
-        </select>
-
-        <button type="submit">Зареєструватися</button>
-    </form>
-    <a href="/home">На головну</a>
-</div>
-
-</body>
-</html> -->
-
 <!DOCTYPE html>
 <html lang="uk">
 <head>
@@ -156,35 +111,38 @@
 
 <div class="form-container">
 
-    <h2>Реєстрація</h2>
+    <h2>Додайте замовлення</h2>
 
     {% if error %}
         <p class="error">{{ error }}</p>
     {% endif %}
 
-    <form action="/register" method="post" enctype="application/x-www-form-urlencoded">
+    <form action="/create_deal" method="post" enctype="application/x-www-form-urlencoded">
 
-        <label>Електронна пошта</label>
-        <input type="text" name="email" required value="{{ email or '' }}">
+        <label>Назва замовлення</label>
+        <input type="text" name="title" required>
 
-        <label>Пароль</label>
-        <input type="password" name="password" required>
+        <label>Опис</label>
+        <input type="text" name="description" required>
 
-        <label>Ім'я</label>
-        <input type="text" name="first_name" required value="{{ first_name or '' }}">
+        <label>Сума</label>
+        <input type="number" step="1.0" name="amount" required>
 
-        <label>Прізвище</label>
-        <input type="text" name="last_name" required value="{{ last_name or '' }}">
+        <label>Валюта</label>
+        <input type="text" name="currency" value="UAH" required>
 
-        <label>Роль</label>
-        <select name="role" required>
-            <option value="admin">Адмін</option>
-            <option value="rop">КВП</option>
-            <option value="manager">Менеджер</option>
+        <label>ID клієнта</label>
+        <input type="number" name="client_id" required>
+
+        <label>Статус</label>
+        <select name="status">
+            <option value="new" selected>Нове</option>
+            <option value="in_progress">В процесі</option>
+            <option value="closed">Закрите</option>
         </select>
-
-        <button type="submit">Зареєструватися</button>
+        <button type="submit">Додати замовлення</button>
     </form>
+
 
     <a href="/home">На головну</a>
 </div>

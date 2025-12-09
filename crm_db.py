@@ -25,7 +25,7 @@ class User(Base):
     id: Mapped[int] = mapped_column(primary_key=True)
 
     email: Mapped[str] = mapped_column(String(100), unique=True, nullable=False)
-    password_hash: Mapped[str] = mapped_column(String(255), nullable=False)
+    password_hash: Mapped[str] = mapped_column(String, nullable=False)
 
     first_name: Mapped[str] = mapped_column(String(50), nullable=False)
     last_name: Mapped[str] = mapped_column(String(50), nullable=False)
@@ -51,7 +51,7 @@ class Client(Base):
 
     phone: Mapped[str] = mapped_column(String(20), nullable=False)
     email: Mapped[str] = mapped_column(String(100), nullable=False)
-    website: Mapped[str] = mapped_column(String(100))
+    website: Mapped[str] = mapped_column(String(100), nullable=True)
 
     manager_id: Mapped[int] = mapped_column(
         Integer, ForeignKey("User.id"), nullable=False
@@ -67,7 +67,7 @@ class Deal(Base):
     id: Mapped[int] = mapped_column(primary_key=True)
 
     title: Mapped[str] = mapped_column(String(150), nullable=False)
-    description: Mapped[str] = mapped_column(String(300), nullable=False)
+    description: Mapped[str] = mapped_column(String(1000), nullable=False)
 
     amount: Mapped[float] = mapped_column(Float, nullable=False)
     currency: Mapped[str] = mapped_column(String(10), default="UAH", nullable=False)
@@ -80,7 +80,7 @@ class Deal(Base):
         Integer, ForeignKey("Client.id"), nullable=False
     )
     manager_id: Mapped[int] = mapped_column(
-        Integer, ForeignKey("U ser.id"), nullable=False
+        Integer, ForeignKey("User.id"), nullable=False
     )
 
     status: Mapped[str] = mapped_column(

@@ -1,0 +1,186 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <title>Профіль користувача</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <h1>Профіль користувача</h1>
+
+    <h2>Ім'я: {{ user.first_name }} {{ user.last_name }}</h2>
+    <h2>Роль: {{ user.role }}</h2>
+    <p><strong>Email:</strong> {{ user.email }}</p>
+    <a href="/home">На головну</a>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8" />
+  <title>Профіль користувача</title>
+  <style>
+    /* Базові налаштування та кольори ті самі, що й у менеджерській панелі */
+    :root{
+      --bg: #f5f6fa;
+      --surface: #ffffff;
+      --muted: #57606f;
+      --text: #2f3542;
+      --accent: #1e90ff;
+      --success: #2ecc71;
+      --danger: #ff4757;
+      --soft: #f0f2f5;
+      --radius: 10px;
+      --font: "Arial", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html,body { height:100%; margin:0; font-family: var(--font); background:var(--bg); color:var(--text); -webkit-font-smoothing:antialiased; }
+
+    /* Центруємо контент і даємо легку картку */
+    .container {
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:32px;
+    }
+
+    .profile-card {
+      width:100%;
+      max-width:720px;
+      background:var(--surface);
+      border-radius:var(--radius);
+      box-shadow: 0 6px 20px rgba(47,53,66,0.06);
+      padding:28px;
+      display:flex;
+      gap:28px;
+      align-items:flex-start;
+    }
+
+    /* Лівий блок — іконка/аватар та роль (стилістика як у topbar.user-box) */
+    .profile-meta {
+      min-width:140px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:12px;
+    }
+    .avatar {
+      background:var(--muted);
+      color:white;
+      width:88px;
+      height:88px;
+      border-radius:50%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:34px;
+      box-shadow: 0 2px 8px rgba(9,10,11,0.04);
+    }
+    .role {
+      font-size:13px;
+      color:var(--muted);
+    }
+
+    /* Правий блок — дані профілю */
+    .profile-body { flex:1; }
+    .title {
+      margin:0 0 6px 0;
+      font-size:22px;
+      font-weight:700;
+      color:var(--text);
+    }
+    .sub {
+      margin:0 0 20px 0;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .field {
+      display:flex;
+      gap:12px;
+      align-items:center;
+      padding:12px 14px;
+      border-radius:8px;
+      background: linear-gradient(180deg, rgba(240,242,245,0.8), rgba(255,255,255,0.6));
+      border:1px solid rgba(224,224,224,0.8);
+      margin-bottom:12px;
+    }
+    .field-label { min-width:110px; font-weight:600; color:var(--muted); font-size:14px; }
+    .field-value { font-size:15px; color:var(--text); word-break:break-word; }
+
+    /* Кнопки в стилі панелі (accent / danger / success) */
+    .controls { display:flex; gap:10px; margin-top:18px; flex-wrap:wrap; }
+    .btn {
+      display:inline-block;
+      padding:10px 14px;
+      border-radius:8px;
+      font-weight:700;
+      text-decoration:none;
+      border:none;
+      cursor:pointer;
+    }
+    .btn-accent { background:var(--accent); color:white; }
+    .btn-danger { background:var(--danger); color:white; }
+    .btn-success { background:var(--success); color:white; }
+
+    .btn:active { transform:translateY(1px); }
+
+    /* Малий адаптив */
+    @media (max-width:640px){
+      .profile-card { flex-direction:column; padding:20px; }
+      .profile-meta { flex-direction:row; align-items:center; justify-content:flex-start; gap:14px; }
+      .avatar { width:64px; height:64px; font-size:22px; }
+      .field { padding:10px; }
+      .field-label { min-width:90px; font-size:13px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="profile-card">
+
+      <div class="profile-meta">
+        <div class="avatar">👨‍💻</div>
+        <div class="role">{{ user.role }}</div>
+      </div>
+
+      <div class="profile-body">
+        <h1 class="title">{{ user.first_name }} {{ user.last_name }}</h1>
+        <div class="sub">Профіль користувача</div>
+
+        <div class="field">
+          <div class="field-label">Email</div>
+          <div class="field-value">{{ user.email }}</div>
+        </div>
+
+        <div class="field">
+          <div class="field-label">Роль</div>
+          <div class="field-value">{{ user.role }}</div>
+        </div>
+
+        <div class="field">
+          <div class="field-label">Ім'я</div>
+          <div class="field-value">{{ user.first_name }}</div>
+        </div>
+
+        <div class="field">
+          <div class="field-label">Прізвище</div>
+          <div class="field-value">{{ user.last_name }}</div>
+        </div>
+
+        <div class="controls">
+          <a href="/home" class="btn btn-accent">На головну</a>
+          <a href="/login" class="btn btn-danger">Вийти</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>
+
+

@@ -4,7 +4,7 @@ from sqlalchemy import select
 
 from crm_db import Base, engine, get_db, User
 from schemas import UserRegister, UserOut
-from security import hash_password
+# from security import hash_password
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import RedirectResponse
 
@@ -46,15 +46,17 @@ async def register_user(
                 "error": "Логин уже занят",
                 "email": email,
                 "first_name": first_name,
-                "last_name": last_name
+                "last_name": last_name,
+                "role": role
             }
         )
 
     new_user = User(
         email=email,
-        password_hash=hash_password(password),
+        password_hash=password,
         first_name=first_name,
         last_name=last_name,
+        role=role
     )
 
     db.add(new_user)
